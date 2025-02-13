@@ -5,16 +5,10 @@ import {
       IonMenuButton, 
       IonPage, 
       IonTitle, 
-      IonToolbar,
-      useIonRouter
+      IonToolbar 
   } from '@ionic/react';
   
-  const Login: React.FC = () => {
-    const navigation = useIonRouter();
-
-    const doLogin = () => {
-        navigation.push('/it35-lab/app','forward','replace');
-    }
+  const Page1: React.FC = () => {
     return (
       <IonPage>
         <IonHeader>
@@ -22,7 +16,7 @@ import {
             <IonButtons slot='start'>
               <IonMenuButton></IonMenuButton>
             </IonButtons>
-            <IonTitle>Login</IonTitle>
+            <IonTitle>Page1</IonTitle>
           </IonToolbar>
         </IonHeader>
         <IonContent fullscreen>
@@ -31,4 +25,4 @@ import {
     );
   };
   
-  export default Login;
+  export default Page1;
