@@ -1,17 +1,19 @@
-import { 
+import {
   IonAvatar,
   IonButton,
-  IonButtons,
-  IonContent, 
-  IonHeader, 
-  IonIcon, 
-  IonInput, 
-  IonInputPasswordToggle, 
-  IonItem, 
-  IonMenuButton, 
-  IonPage, 
-  IonTitle, 
-  IonToolbar, 
+  IonCol,
+  IonContent,
+  IonGrid,
+  IonHeader,
+  IonIcon,
+  IonInput,
+  IonInputPasswordToggle,
+  IonItem,
+  IonMenuButton,
+  IonPage,
+  IonRow,
+  IonTitle,
+  IonToolbar,
   useIonRouter
 } from '@ionic/react';
 import { logoFacebook, logoIonic } from 'ionicons/icons';
@@ -70,19 +72,25 @@ const Login: React.FC = () => {
           </h5>
         </div>
 
-        <IonItem>
-          <IonInput label="Email" type="email" placeholder="youremail@gmail.com"></IonInput>
-        </IonItem>
+        <IonGrid style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <IonRow>
+            <IonCol size="8">
+              <IonItem>
+                <IonInput label="Email" type="email" placeholder="youremail@gmail.com"></IonInput>
+              </IonItem>
 
-        <IonItem>
-          <IonInput type="password" label="Password">
-            <IonInputPasswordToggle slot="end"></IonInputPasswordToggle>
-          </IonInput>
-        </IonItem>
+              <IonItem>
+                <IonInput type="password" label="Password">
+                  <IonInputPasswordToggle slot="end"></IonInputPasswordToggle>
+                </IonInput>
+              </IonItem>
 
-        <IonButton onClick={() => doLogin()} expand="full">
-          Login
-        </IonButton>
+              <IonButton onClick={doLogin} expand="full">
+                Login
+              </IonButton>
+            </IonCol>
+          </IonRow>
+        </IonGrid>
       </IonContent>
     </IonPage>
   );
