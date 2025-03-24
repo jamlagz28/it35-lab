@@ -31,6 +31,25 @@ const Auth: React.FC = () => {
   const [showAlert, setShowAlert] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [showToast, setShowToast] = useState(false);
+  const [showVerificationModal, setShowVerificationModal] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
+
+  // Handle the logic for opening verification modal after checks
+  const handleOpenVerificationModal = () => {
+    if (!email.endsWith("@nbsc.edu.ph")) {
+      setAlertMessage("Only @nbsc.edu.ph emails are allowed to register.");
+      setShowAlert(true);
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      setAlertMessage("Passwords do not match.");
+      setShowAlert(true);
+      return;
+    }
+
+    setShowVerificationModal(true);
+  };
 
   const doLogin = () => {
     if (!username || !password) {
@@ -44,11 +63,9 @@ const Auth: React.FC = () => {
   const doRegister = () => {
     if (!username || !email || !password || !confirmPassword) {
       setShowAlert(true);
-    } else if (password !== confirmPassword) {
-      setShowAlert(true);
     } else {
-      setShowSuccessModal(true);
-      setIsRegister(false);
+      // Call the new function to validate and handle verification modal
+      handleOpenVerificationModal();
     }
   };
 
@@ -124,7 +141,7 @@ const Auth: React.FC = () => {
         </IonGrid>
       </IonContent>
 
-      <IonAlert isOpen={showAlert} onDidDismiss={() => setShowAlert(false)} header="Error" message="Please fill all fields correctly." buttons={['OK']} />
+      <IonAlert isOpen={showAlert} onDidDismiss={() => setShowAlert(false)} header="Error" message={alertMessage} buttons={['OK']} />
 
       <IonModal isOpen={showSuccessModal} onDidDismiss={() => setShowSuccessModal(false)}>
         <IonContent className="ion-padding">
@@ -134,6 +151,15 @@ const Auth: React.FC = () => {
       </IonModal>
 
       <IonToast isOpen={showToast} message="Login successful! Redirecting..." duration={3000} onDidDismiss={() => setShowToast(false)} />
+
+      {/* Add Verification Modal here */}
+      <IonModal isOpen={showVerificationModal} onDidDismiss={() => setShowVerificationModal(false)}>
+        <IonContent className="ion-padding">
+          <h2 style={{ fontFamily: 'Verdana, sans-serif', fontSize: '20px', fontWeight: 'bold' }}>Please verify your email address</h2>
+          {/* Add your email verification logic here */}
+          <IonButton expand="full" onClick={() => { setShowVerificationModal(false); setShowSuccessModal(true); }}>Verify</IonButton>
+        </IonContent>
+      </IonModal>
     </IonPage>
   );
 };
