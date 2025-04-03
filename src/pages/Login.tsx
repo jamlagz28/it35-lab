@@ -96,7 +96,7 @@ const Login: React.FC = () => {
             <IonInputPasswordToggle slot="end"></IonInputPasswordToggle>
           </IonInput>
         </div>
-        <IonButton onClick={doLogin} expand="full" shape='rectangle'>
+        <IonButton onClick={doLogin} expand="full" shape='round'>
         Log Into Your Account
         </IonButton>
 
