@@ -96,8 +96,8 @@ const Login: React.FC = () => {
             <IonInputPasswordToggle slot="end"></IonInputPasswordToggle>
           </IonInput>
         </div>
-        <IonButton onClick={doLogin} expand="full" shape='round'>
-        Log Into Your Account
+        <IonButton onClick={doLogin} expand="full" shape='round' className="spotify-button" color="success">
+          Log Into Your Account
         </IonButton>
 
         <IonButton routerLink="/it35-lab/Register" expand="full" fill="clear" shape='round'>
