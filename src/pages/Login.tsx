@@ -1,50 +1,63 @@
-import {
+import { 
+  IonAlert,
   IonAvatar,
   IonButton,
-  IonCol,
-  IonContent,
-  IonGrid,
-  IonHeader,
-  IonIcon,
-  IonInput,
-  IonInputPasswordToggle,
-  IonItem,
-  IonMenuButton,
-  IonPage,
-  IonRow,
-  IonTitle,
-  IonToolbar,
+  IonContent, 
+  IonIcon, 
+  IonInput, 
+  IonInputPasswordToggle,  
+  IonPage,  
+  IonToast,  
   useIonRouter
 } from '@ionic/react';
-import { logoFacebook, logoIonic } from 'ionicons/icons';
+import { useState } from 'react';
+import { supabase } from '../utils/supabaseClient';
+
+const AlertBox: React.FC<{ message: string; isOpen: boolean; onClose: () => void }> = ({ message, isOpen, onClose }) => {
+  return (
+    <IonAlert
+      isOpen={isOpen}
+      onDidDismiss={onClose}
+      header="Notification"
+      message={message}
+      buttons={['OK']}
+    />
+  );
+};
 
 const Login: React.FC = () => {
   const navigation = useIonRouter();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [alertMessage, setAlertMessage] = useState('');
+  const [showAlert, setShowAlert] = useState(false);
+  const [showToast, setShowToast] = useState(false);
 
-  const doLogin = () => {
-    navigation.push('/it35-lab/app', 'forward', 'replace');
+  const doLogin = async () => {
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+
+    if (error) {
+      setAlertMessage(error.message);
+      setShowAlert(true);
+      return;
+    }
+
+    setShowToast(true); 
+    setTimeout(() => {
+      navigation.push('/it35-lab/app', 'forward', 'replace');
+    }, 300);
   };
-
+  
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Login</IonTitle>
-        </IonToolbar>
-      </IonHeader>
       <IonContent className='ion-padding'>
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            height: '100%',
-            width: '100%',
-            marginTop: '-10rem',
-            marginBottom: '-18rem',
-          }}
-        >
+        <div style={{
+          display: 'flex',
+          flexDirection:'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          marginTop:'25%'
+        }}>
           <IonAvatar
             style={{
               display: 'flex',
@@ -52,45 +65,57 @@ const Login: React.FC = () => {
               justifyContent: 'center',
               width: '150px',
               height: '150px',
-              borderRadius: '50%',
-              overflow: 'hidden',
+              borderRadius: '50%', 
+              overflow: 'hidden' 
             }}
           >
-            <img
-              alt="Silhouette of a person's head"
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRWVkXV1nRBH6hUiuHMuGywaBgZF7PxmtJuw&s"
+            <img 
+              src="https://ritalinboy.com/app/uploads/2022/05/148-1487614_spotify-logo-small-spotify-logo-transparent-hd-png.png" 
+              alt="Spotify Logo" 
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
             />
           </IonAvatar>
-          <h5
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
+          <h3 style={{
+            textAlign: 'center',
+            fontSize: '24px',
+            fontWeight: 'bold',
+            color: '#1DB954',
+            marginTop: '10px'
+          }}>LOGIN TO SPOTIFY</h3>
+          <IonInput label="Email" labelPlacement="floating" fill="outline" type="email" placeholder="Enter Email" style={{ backgroundColor: '#121212', color: '#FFFFFF', borderRadius: '8px', border: '1px solid #1DB954', padding: '10px' }}
+            value={email}
+            onIonChange={e => setEmail(e.detail.value!)}
+          />
+          <IonInput style={{ marginTop: '10px', backgroundColor: '#121212', color: '#FFFFFF', borderRadius: '8px', border: '1px solid #1DB954', padding: '10px' }}      
+            fill="outline"
+            type="password"
+            placeholder="Password"
+            value={password}
+            onIonChange={e => setPassword(e.detail.value!)}
           >
-            Users Login
-          </h5>
+            <IonInputPasswordToggle slot="end"></IonInputPasswordToggle>
+          </IonInput>
         </div>
+        <IonButton onClick={doLogin} expand="full" shape='rectangle'>
+        Log Into Your Account
+        </IonButton>
 
-        <IonGrid style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <IonRow>
-            <IonCol size="8">
-              <IonItem>
-                <IonInput label="Email" type="email" placeholder="youremail@gmail.com"></IonInput>
-              </IonItem>
+        <IonButton routerLink="/it35-lab/Register" expand="full" fill="clear" shape='round'>
+          Don't have an account? Register here
+        </IonButton>
 
-              <IonItem>
-                <IonInput type="password" label="Password">
-                  <IonInputPasswordToggle slot="end"></IonInputPasswordToggle>
-                </IonInput>
-              </IonItem>
+        {/* Reusable AlertBox Component */}
+        <AlertBox message={alertMessage} isOpen={showAlert} onClose={() => setShowAlert(false)} />
 
-              <IonButton onClick={doLogin} expand="full">
-                Login
-              </IonButton>
-            </IonCol>
-          </IonRow>
-        </IonGrid>
+        {/* IonToast for success message */}
+        <IonToast
+          isOpen={showToast}
+          onDidDismiss={() => setShowToast(false)}
+          message="Login complete! Preparing your dashboard"
+          duration={1500}
+          position="top"
+          color="success"
+        />
       </IonContent>
     </IonPage>
   );

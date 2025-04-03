@@ -1,0 +1,48 @@
+.auth-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: -5rem;
+    margin-bottom: -5rem;
+  }
+  
+  .auth-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+  
+  .auth-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Responsive avatar scaling */
+  @media (min-width: 768px) {
+    .auth-avatar {
+      width: 150px;
+      height: 150px;
+    }
+  }
+  
+  /* Mobile adjustments */
+  @media (max-width: 768px) {
+    .auth-container {
+      margin-top: -3rem;
+      margin-bottom: -3rem;
+    }
+  }
+  
+  .auth-toggle-text {
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  .auth-toggle-link {
+    color: blue;
+    cursor: pointer;
+  }
+  
