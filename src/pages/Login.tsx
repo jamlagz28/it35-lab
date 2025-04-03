@@ -10,7 +10,6 @@ import {
   IonToast,  
   useIonRouter
 } from '@ionic/react';
-import { logoIonic } from 'ionicons/icons';
 import { useState } from 'react';
 import { supabase } from '../utils/supabaseClient';
 
@@ -70,27 +69,24 @@ const Login: React.FC = () => {
               overflow: 'hidden' 
             }}
           >
-            <IonIcon 
-              icon={logoIonic}
-              color='primary'
-              style={{ fontSize: '120px', color: '#6c757d' }} 
+            <img 
+              src="https://ritalinboy.com/app/uploads/2022/05/148-1487614_spotify-logo-small-spotify-logo-transparent-hd-png.png" 
+              alt="Spotify Logo" 
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
             />
           </IonAvatar>
-          <h1 style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>USER LOGIN</h1>
-          <IonInput
-            label="Email" 
-            labelPlacement="floating" 
-            fill="outline"
-            type="email"
-            placeholder="Enter Email"
+          <h3 style={{
+            textAlign: 'center',
+            fontSize: '24px',
+            fontWeight: 'bold',
+            color: '#1DB954',
+            marginTop: '10px'
+          }}>LOGIN TO SPOTIFY</h3>
+          <IonInput label="Email" labelPlacement="floating" fill="outline" type="email" placeholder="Enter Email" style={{ backgroundColor: '#121212', color: '#FFFFFF', borderRadius: '8px', border: '1px solid #1DB954', padding: '10px' }}
             value={email}
             onIonChange={e => setEmail(e.detail.value!)}
           />
-          <IonInput style={{ marginTop:'10px' }}      
+          <IonInput style={{ marginTop: '10px', backgroundColor: '#121212', color: '#FFFFFF', borderRadius: '8px', border: '1px solid #1DB954', padding: '10px' }}      
             fill="outline"
             type="password"
             placeholder="Password"
@@ -100,7 +96,7 @@ const Login: React.FC = () => {
             <IonInputPasswordToggle slot="end"></IonInputPasswordToggle>
           </IonInput>
         </div>
-        <IonButton onClick={doLogin} expand="full" shape='round'>
+        <IonButton onClick={doLogin} expand="full" shape='round' style={{ backgroundColor: '#1DB954', color: '#FFFFFF' }}>
           Login
         </IonButton>
 
