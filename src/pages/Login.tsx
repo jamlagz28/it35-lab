@@ -96,8 +96,8 @@ const Login: React.FC = () => {
             <IonInputPasswordToggle slot="end"></IonInputPasswordToggle>
           </IonInput>
         </div>
-        <IonButton onClick={doLogin} expand="full" shape='round'>
-          Login
+        <IonButton onClick={doLogin} expand="full" shape='rectangle'>
+        Log Into Your Account
         </IonButton>
 
         <IonButton routerLink="/it35-lab/Register" expand="full" fill="clear" shape='round'>
@@ -111,10 +111,10 @@ const Login: React.FC = () => {
         <IonToast
           isOpen={showToast}
           onDidDismiss={() => setShowToast(false)}
-          message="Login successful! Redirecting..."
+          message="Login complete! Preparing your dashboard"
           duration={1500}
           position="top"
-          color="primary"
+          color="success"
         />
       </IonContent>
     </IonPage>
