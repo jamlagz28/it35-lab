@@ -118,7 +118,7 @@ const Register: React.FC = () => {
                   fontWeight: 'bold',
                   color: '#1DB954',
                   marginTop: '10px'
-                }}>Sign Up for Spotify Now</h3>
+                }}>SIGN UP FOR SPOTIFY NOW</h3>
 
                 <h1>Create an Account</h1>
 
@@ -136,8 +136,8 @@ const Register: React.FC = () => {
                 <IonButton onClick={handleOpenVerificationModal} expand="full" shape='round'  color="success" style={{ marginTop: '15px' }}>
                     Register
                 </IonButton>
-                <IonButton routerLink="/it35-lab" expand="full" fill="clear" shape='round'>
-                    Already have an account? Sign in
+                <IonButton routerLink="/it35-lab" expand="full" fill="clear" color="dark" shape='round'>
+                Already registered? Sign in here
                 </IonButton>
 
                 {/* Reusable AlertBox Component */}
