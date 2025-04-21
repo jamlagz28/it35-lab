@@ -82,11 +82,18 @@ const Login: React.FC = () => {
             color: '#1DB954',
             marginTop: '10px'
           }}>LOGIN TO SPOTIFY</h3>
-          <IonInput label="Email" labelPlacement="floating" fill="outline" type="email" placeholder="Enter Email" style={{ backgroundColor: '#121212', color: '#FFFFFF', borderRadius: '8px', border: '1px solid #1DB954', padding: '10px' }}
+          <IonInput 
+            label="Email" 
+            labelPlacement="floating" 
+            fill="outline" 
+            type="email" 
+            placeholder="Enter Email" 
+            style={{ backgroundColor: '#121212', color: '#FFFFFF', borderRadius: '8px', border: '1px solid #1DB954', padding: '10px' }}
             value={email}
             onIonChange={e => setEmail(e.detail.value!)}
           />
-          <IonInput style={{ marginTop: '10px', backgroundColor: '#121212', color: '#FFFFFF', borderRadius: '8px', border: '1px solid #1DB954', padding: '10px' }}      
+          <IonInput 
+            style={{ marginTop: '10px', backgroundColor: '#121212', color: '#FFFFFF', borderRadius: '8px', border: '1px solid #1DB954', padding: '10px' }}      
             fill="outline"
             type="password"
             placeholder="Password"
@@ -96,11 +103,14 @@ const Login: React.FC = () => {
             <IonInputPasswordToggle slot="end"></IonInputPasswordToggle>
           </IonInput>
         </div>
-        <IonButton onClick={doLogin} expand="full" shape='rectangle'>
-        Log Into Your Account
+
+        {/* Login Button */}
+        <IonButton onClick={doLogin} expand="full">
+          Log Into Your Account
         </IonButton>
 
-        <IonButton routerLink="/it35-lab/Register" expand="full" fill="clear" shape='round'>
+        {/* Register Button */}
+        <IonButton routerLink="/it35-lab/Register" expand="full" fill="clear" shape="round">
           Don't have an account? Register here
         </IonButton>
 
