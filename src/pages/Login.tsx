@@ -1,127 +1,205 @@
-import { 
+import {
   IonAlert,
   IonAvatar,
   IonButton,
-  IonContent, 
-  IonIcon, 
-  IonInput, 
-  IonInputPasswordToggle,  
-  IonPage,  
-  IonToast,  
+  IonContent,
+  IonIcon,
+  IonPage,
+  IonToast,
   useIonRouter
 } from '@ionic/react';
 import { useState } from 'react';
 import { supabase } from '../utils/supabaseClient';
+import { personCircleOutline } from 'ionicons/icons';
 
-const AlertBox: React.FC<{ message: string; isOpen: boolean; onClose: () => void }> = ({ message, isOpen, onClose }) => {
+const NotificationBox: React.FC<{ message: string; isOpen: boolean; onClose: () => void }> = ({ message, isOpen, onClose }) => {
   return (
     <IonAlert
       isOpen={isOpen}
       onDidDismiss={onClose}
-      header="Notification"
+      header="Heads up!"
       message={message}
-      buttons={['OK']}
+      buttons={['Close']}
     />
   );
 };
 
-const Login: React.FC = () => {
-  const navigation = useIonRouter();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [alertMessage, setAlertMessage] = useState('');
-  const [showAlert, setShowAlert] = useState(false);
-  const [showToast, setShowToast] = useState(false);
+const AccessPortal: React.FC = () => {
+  const router = useIonRouter();
+  const [userEmail, setUserEmail] = useState('');
+  const [userPassword, setUserPassword] = useState('');
+  const [notice, setNotice] = useState('');
+  const [showNotice, setShowNotice] = useState(false);
+  const [toastVisible, setToastVisible] = useState(false);
 
-  const doLogin = async () => {
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
+  const handleLogin = async () => {
+    const { error } = await supabase.auth.signInWithPassword({
+      email: userEmail,
+      password: userPassword,
+    });
 
     if (error) {
-      setAlertMessage(error.message);
-      setShowAlert(true);
+      setNotice(error.message);
+      setShowNotice(true);
       return;
     }
 
-    setShowToast(true); 
+    setToastVisible(true);
     setTimeout(() => {
-      navigation.push('/it35-lab/app', 'forward', 'replace');
+      router.push('/it35-lab/app', 'forward', 'replace');
     }, 300);
   };
-  
+
   return (
     <IonPage>
-      <IonContent className='ion-padding'>
+      <IonContent fullscreen style={{
+        backgroundColor: '#f1f1f1', // Light YouTube background
+        color: '#333333', // Dark text color
+        fontFamily: "'Roboto', sans-serif" // YouTube's primary font
+      }}>
         <div style={{
           display: 'flex',
-          flexDirection:'column',
+          flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          marginTop:'25%'
+          minHeight: '100vh',
+          padding: '20px',
         }}>
-          <IonAvatar
+          {/* YouTube Music Icon as Avatar */}
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Youtube_Music_icon.svg/1024px-Youtube_Music_icon.svg.png"
+            alt="YouTube Music Logo"
             style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: '150px',
-              height: '150px',
-              borderRadius: '50%', 
-              overflow: 'hidden' 
+              width: '140px',
+              height: '140px',
+              marginBottom: '20px',
             }}
-          >
-            <img 
-              src="https://ritalinboy.com/app/uploads/2022/05/148-1487614_spotify-logo-small-spotify-logo-transparent-hd-png.png" 
-              alt="Spotify Logo" 
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
-            />
-          </IonAvatar>
-          <h3 style={{
-            textAlign: 'center',
+          />
+
+          <h2 style={{
+            color: '#FF0000', // YouTube Red
             fontSize: '24px',
             fontWeight: 'bold',
-            color: '#1DB954',
-            marginTop: '10px'
-          }}>LOGIN TO SPOTIFY</h3>
-          <IonInput 
-            label="Email" 
-            labelPlacement="floating" 
-            fill="outline" 
-            type="email" 
-            placeholder="Enter Email" 
-            style={{ backgroundColor: '#121212', color: '#FFFFFF', borderRadius: '8px', border: '1px solid #1DB954', padding: '10px' }}
-            value={email}
-            onIonChange={e => setEmail(e.detail.value!)}
-          />
-          <IonInput 
-            style={{ marginTop: '10px', backgroundColor: '#121212', color: '#FFFFFF', borderRadius: '8px', border: '1px solid #1DB954', padding: '10px' }}      
-            fill="outline"
-            type="password"
-            placeholder="Password"
-            value={password}
-            onIonChange={e => setPassword(e.detail.value!)}
+            marginBottom: '30px',
+            textAlign: 'center',
+          }}>
+            Log in to Your YouTube-like Portal
+          </h2>
+
+          {/* Email Input with custom label and animation */}
+          <div style={{ position: 'relative', width: '100%', maxWidth: '400px', marginBottom: '15px' }}>
+            <input
+              type="email"
+              placeholder=" "
+              value={userEmail}
+              onChange={(e) => setUserEmail(e.target.value)}
+              onFocus={(e) => e.target.style.boxShadow = '0 0 8px 2px #FF0000'}
+              onBlur={(e) => e.target.style.boxShadow = 'none'}
+              style={{
+                width: '100%',
+                backgroundColor: '#ffffff',
+                border: '1px solid #FF0000',
+                color: '#333333',
+                borderRadius: '8px',
+                padding: '12px 10px 12px 10px',
+                fontSize: '16px',
+                transition: 'box-shadow 0.3s ease',
+              }}
+            />
+            <label style={{
+              position: 'absolute',
+              top: '50%',
+              left: '10px',
+              color: '#FF0000',
+              fontSize: '16px',
+              pointerEvents: 'none',
+              transform: 'translateY(-50%)',
+              transition: '0.2s ease all',
+            }}>
+              Email
+            </label>
+          </div>
+
+          {/* Password Input with custom label and animation */}
+          <div style={{ position: 'relative', width: '100%', maxWidth: '400px', marginBottom: '25px' }}>
+            <input
+              type="password"
+              placeholder=" "
+              value={userPassword}
+              onChange={(e) => setUserPassword(e.target.value)}
+              onFocus={(e) => e.target.style.boxShadow = '0 0 8px 2px #FF0000'}
+              onBlur={(e) => e.target.style.boxShadow = 'none'}
+              style={{
+                width: '100%',
+                backgroundColor: '#ffffff',
+                border: '1px solid #FF0000',
+                color: '#333333',
+                borderRadius: '8px',
+                padding: '12px 10px 12px 10px',
+                fontSize: '16px',
+                transition: 'box-shadow 0.3s ease',
+              }}
+            />
+            <label style={{
+              position: 'absolute',
+              top: '50%',
+              left: '10px',
+              color: '#FF0000',
+              fontSize: '16px',
+              pointerEvents: 'none',
+              transform: 'translateY(-50%)',
+              transition: '0.2s ease all',
+            }}>
+              Password
+            </label>
+          </div>
+
+          {/* Login Button with hover effect */}
+          <IonButton
+            expand="block"
+            style={{
+              width: '100%',
+              maxWidth: '400px',
+              backgroundColor: '#FF0000', // YouTube Red
+              color: '#ffffff',
+              fontWeight: 'bold',
+              borderRadius: '10px',
+              marginBottom: '10px',
+              transition: 'background-color 0.3s ease, box-shadow 0.3s ease',
+            }}
+            onClick={handleLogin}
+            onIonFocus={(e) => e.target.style.boxShadow = '0 0 12px 4px #FF0000'}
+            onIonBlur={(e) => e.target.style.boxShadow = 'none'}
           >
-            <IonInputPasswordToggle slot="end"></IonInputPasswordToggle>
-          </IonInput>
+            Log In
+          </IonButton>
+
+          {/* Register Button with hover effect */}
+          <IonButton
+            routerLink="/it35-lab/Register"
+            expand="block"
+            fill="clear"
+            style={{
+              color: '#666666',
+              textDecoration: 'underline',
+              fontSize: '14px',
+              transition: 'color 0.3s ease',
+            }}
+            onIonFocus={(e) => e.target.style.color = '#FF0000'}
+            onIonBlur={(e) => e.target.style.color = '#666666'}
+          >
+            Need an account? Register here
+          </IonButton>
         </div>
 
-        {/* Login Button */}
-        <IonButton onClick={doLogin} expand="full">
-          Log Into Your Account
-        </IonButton>
+        {/* Notification alert */}
+        <NotificationBox message={notice} isOpen={showNotice} onClose={() => setShowNotice(false)} />
 
-        {/* Register Button */}
-        <IonButton routerLink="/it35-lab/Register" expand="full" fill="clear" shape="round">
-          Don't have an account? Register here
-        </IonButton>
-
-        {/* Reusable AlertBox Component */}
-        <AlertBox message={alertMessage} isOpen={showAlert} onClose={() => setShowAlert(false)} />
-
-        {/* IonToast for success message */}
+        {/* Toast message */}
         <IonToast
-          isOpen={showToast}
-          onDidDismiss={() => setShowToast(false)}
-          message="Login complete! Preparing your dashboard"
+          isOpen={toastVisible}
+          onDidDismiss={() => setToastVisible(false)}
+          message="Welcome! Redirecting to your dashboard..."
           duration={1500}
           position="top"
           color="success"
@@ -131,4 +209,4 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;
+export default AccessPortal;
