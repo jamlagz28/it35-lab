@@ -1,16 +1,13 @@
 import {
   IonAlert,
-  IonAvatar,
   IonButton,
   IonContent,
-  IonIcon,
   IonPage,
   IonToast,
   useIonRouter
 } from '@ionic/react';
 import { useState } from 'react';
 import { supabase } from '../utils/supabaseClient';
-import { personCircleOutline } from 'ionicons/icons';
 
 const NotificationBox: React.FC<{ message: string; isOpen: boolean; onClose: () => void }> = ({ message, isOpen, onClose }) => {
   return (
@@ -52,150 +49,162 @@ const AccessPortal: React.FC = () => {
 
   return (
     <IonPage>
-      <IonContent fullscreen style={{
-        backgroundColor: '#f1f1f1', // Light YouTube background
-        color: '#333333', // Dark text color
-        fontFamily: "'Roboto', sans-serif" // YouTube's primary font
-      }}>
-        <div style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          minHeight: '100vh',
-          padding: '20px',
-        }}>
-          {/* YouTube Music Icon as Avatar */}
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Youtube_Music_icon.svg/1024px-Youtube_Music_icon.svg.png"
-            alt="YouTube Music Logo"
-            style={{
-              width: '140px',
-              height: '140px',
-              marginBottom: '20px',
-            }}
-          />
-
-          <h2 style={{
-            color: '#FF0000', // YouTube Red
-            fontSize: '24px',
-            fontWeight: 'bold',
-            marginBottom: '30px',
-            textAlign: 'center',
+      <IonContent fullscreen>
+        <div
+          style={{
+            backgroundImage: 'url("https://i.pinimg.com/originals/79/7b/96/797b96e0880a4fe147f1eaa89d7c7013.gif")',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            minHeight: '100vh',
+            width: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            padding: '20px',
+          }}
+        >
+          <div style={{
+            backgroundColor: 'rgba(255, 255, 255, 0.2)', // Transparent white
+            borderRadius: '15px',
+            padding: '30px',
+            width: '100%',
+            maxWidth: '420px',
+            backdropFilter: 'blur(8px)', // Frosted glass effect
+            border: '1px solid rgba(255,255,255,0.3)'
           }}>
-            Log in to Your YouTube-like Portal
-          </h2>
-
-          {/* Email Input with custom label and animation */}
-          <div style={{ position: 'relative', width: '100%', maxWidth: '400px', marginBottom: '15px' }}>
-            <input
-              type="email"
-              placeholder=" "
-              value={userEmail}
-              onChange={(e) => setUserEmail(e.target.value)}
-              onFocus={(e) => e.target.style.boxShadow = '0 0 8px 2px #FF0000'}
-              onBlur={(e) => e.target.style.boxShadow = 'none'}
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Youtube_Music_icon.svg/1024px-Youtube_Music_icon.svg.png"
+              alt="YouTube Music Logo"
               style={{
-                width: '100%',
-                backgroundColor: '#ffffff',
-                border: '1px solid #FF0000',
-                color: '#333333',
-                borderRadius: '8px',
-                padding: '12px 10px 12px 10px',
-                fontSize: '16px',
-                transition: 'box-shadow 0.3s ease',
+                width: '140px',
+                height: '140px',
+                margin: '0 auto 20px',
+                display: 'block'
               }}
             />
-            <label style={{
-              position: 'absolute',
-              top: '50%',
-              left: '10px',
-              color: '#FF0000',
-              fontSize: '16px',
-              pointerEvents: 'none',
-              transform: 'translateY(-50%)',
-              transition: '0.2s ease all',
-            }}>
-              Email
-            </label>
-          </div>
 
-          {/* Password Input with custom label and animation */}
-          <div style={{ position: 'relative', width: '100%', maxWidth: '400px', marginBottom: '25px' }}>
-            <input
-              type="password"
-              placeholder=" "
-              value={userPassword}
-              onChange={(e) => setUserPassword(e.target.value)}
-              onFocus={(e) => e.target.style.boxShadow = '0 0 8px 2px #FF0000'}
-              onBlur={(e) => e.target.style.boxShadow = 'none'}
-              style={{
-                width: '100%',
-                backgroundColor: '#ffffff',
-                border: '1px solid #FF0000',
-                color: '#333333',
-                borderRadius: '8px',
-                padding: '12px 10px 12px 10px',
-                fontSize: '16px',
-                transition: 'box-shadow 0.3s ease',
-              }}
-            />
-            <label style={{
-              position: 'absolute',
-              top: '50%',
-              left: '10px',
+            <h2 style={{
               color: '#FF0000',
-              fontSize: '16px',
-              pointerEvents: 'none',
-              transform: 'translateY(-50%)',
-              transition: '0.2s ease all',
-            }}>
-              Password
-            </label>
-          </div>
-
-          {/* Login Button with hover effect */}
-          <IonButton
-            expand="block"
-            style={{
-              width: '100%',
-              maxWidth: '400px',
-              backgroundColor: '#FF0000', // YouTube Red
-              color: '#ffffff',
+              fontSize: '24px',
               fontWeight: 'bold',
-              borderRadius: '10px',
-              marginBottom: '10px',
-              transition: 'background-color 0.3s ease, box-shadow 0.3s ease',
-            }}
-            onClick={handleLogin}
-            onIonFocus={(e) => e.target.style.boxShadow = '0 0 12px 4px #FF0000'}
-            onIonBlur={(e) => e.target.style.boxShadow = 'none'}
-          >
-            Log In
-          </IonButton>
+              marginBottom: '30px',
+              textAlign: 'center',
+            }}>
+              Log in to Your YouTube Portal
+            </h2>
 
-          {/* Register Button with hover effect */}
-          <IonButton
-            routerLink="/it35-lab/Register"
-            expand="block"
-            fill="clear"
-            style={{
-              color: '#666666',
-              textDecoration: 'underline',
-              fontSize: '14px',
-              transition: 'color 0.3s ease',
-            }}
-            onIonFocus={(e) => e.target.style.color = '#FF0000'}
-            onIonBlur={(e) => e.target.style.color = '#666666'}
-          >
-            Need an account? Register here
-          </IonButton>
+            {/* Email Input */}
+            <div style={{ position: 'relative', marginBottom: '15px' }}>
+              <input
+                type="email"
+                placeholder=" "
+                value={userEmail}
+                onChange={(e) => setUserEmail(e.target.value)}
+                onFocus={(e) => e.target.style.boxShadow = '0 0 8px 2pxrgb(255, 255, 255)'}
+                onBlur={(e) => e.target.style.boxShadow = 'none'}
+                style={{
+                  width: '100%',
+                  backgroundColor: '#ffffff',
+                  border: '1px solid #FF0000',
+                  color: '#333333',
+                  borderRadius: '8px',
+                  padding: '12px 10px',
+                  fontSize: '16px',
+                  transition: 'box-shadow 0.3s ease',
+                }}
+              />
+              {userEmail.length === 0 && (
+                <label style={{
+                  position: 'absolute',
+                  top: '50%',
+                  left: '10px',
+                  color: '#FF0000',
+                  fontSize: '16px',
+                  pointerEvents: 'none',
+                  transform: 'translateY(-50%)',
+                  transition: '0.2s ease all',
+                }}>
+                  Email
+                </label>
+              )}
+            </div>
+
+            {/* Password Input */}
+            <div style={{ position: 'relative', marginBottom: '25px' }}>
+              <input
+                type="password"
+                placeholder=" "
+                value={userPassword}
+                onChange={(e) => setUserPassword(e.target.value)}
+                onFocus={(e) => e.target.style.boxShadow = '0 0 8px 2px #FF0000'}
+                onBlur={(e) => e.target.style.boxShadow = 'none'}
+                style={{
+                  width: '100%',
+                  backgroundColor: '#ffffff',
+                  border: '1px solid #FF0000',
+                  color: '#333333',
+                  borderRadius: '8px',
+                  padding: '12px 10px',
+                  fontSize: '16px',
+                  transition: 'box-shadow 0.3s ease',
+                }}
+              />
+              {userPassword.length === 0 && (
+                <label style={{
+                  position: 'absolute',
+                  top: '50%',
+                  left: '10px',
+                  color: '#FF0000',
+                  fontSize: '16px',
+                  pointerEvents: 'none',
+                  transform: 'translateY(-50%)',
+                  transition: '0.2s ease all',
+                }}>
+                  Password
+                </label>
+              )}
+            </div>
+
+            {/* Login Button */}
+            <IonButton
+              expand="block"
+              style={{
+                backgroundColor: '#FF0000',
+                color: '#ffffff',
+                fontWeight: 'bold',
+                borderRadius: '10px',
+                marginBottom: '10px',
+                transition: 'background-color 0.3s ease, box-shadow 0.3s ease',
+              }}
+              onClick={handleLogin}
+              onIonFocus={(e) => e.target.style.boxShadow = '0 0 12px 4px #FF0000'}
+              onIonBlur={(e) => e.target.style.boxShadow = 'none'}
+            >
+              Log In
+            </IonButton>
+
+            {/* Register Link */}
+            <IonButton
+              routerLink="/it35-lab/Register"
+              expand="block"
+              fill="clear"
+              style={{
+                color: '#ffffff',
+                textDecoration: 'underline',
+                fontSize: '14px',
+                transition: 'color 0.3s ease',
+              }}
+              onIonFocus={(e) => e.target.style.color = '#FF0000'}
+              onIonBlur={(e) => e.target.style.color = '#ffffff'}
+            >
+              Need an account? Register here
+            </IonButton>
+          </div>
         </div>
 
-        {/* Notification alert */}
         <NotificationBox message={notice} isOpen={showNotice} onClose={() => setShowNotice(false)} />
 
-        {/* Toast message */}
         <IonToast
           isOpen={toastVisible}
           onDidDismiss={() => setToastVisible(false)}

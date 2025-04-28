@@ -90,7 +90,9 @@ const SignUpPortal: React.FC = () => {
       <IonContent
         className="ion-padding"
         style={{
-          backgroundColor: '#f1f1f1', // Light YouTube background
+          backgroundImage: 'url("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/5b434546-d2d2-4907-92ff-af5ac256c1fe/dhgz2fh-16f356b0-6789-4567-816f-777ed4df066a.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzViNDM0NTQ2LWQyZDItNDkwNy05MmZmLWFmNWFjMjU2YzFmZVwvZGhnejJmaC0xNmYzNTZiMC02Nzg5LTQ1NjctODE2Zi03NzdlZDRkZjA2NmEuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.BUB3YJio3SS9HcO798ByqVJnKRFHg-1yfJK3uwqlkYU")',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
           color: '#333333', // Dark text color
           fontFamily: "'Roboto', sans-serif", // YouTube's primary font
         }}
@@ -105,7 +107,7 @@ const SignUpPortal: React.FC = () => {
         }}>
           {/* YouTube Music Icon */}
           <img
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Youtube_Music_icon.svg/1024px-Youtube_Music_icon.svg.png"
+            src="https://cdn.dribbble.com/userupload/20737752/file/original-ebe640c326de24d69e75d9efbfe0d113.gif"
             alt="YouTube Music Logo"
             style={{
               width: '140px',
