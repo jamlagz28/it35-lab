@@ -87,170 +87,149 @@ const SignUpPortal: React.FC = () => {
 
   return (
     <IonPage>
-      <IonContent
-        className="ion-padding"
-        style={{
-          backgroundImage: 'url("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/5b434546-d2d2-4907-92ff-af5ac256c1fe/dhgz2fh-16f356b0-6789-4567-816f-777ed4df066a.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzViNDM0NTQ2LWQyZDItNDkwNy05MmZmLWFmNWFjMjU2YzFmZVwvZGhnejJmaC0xNmYzNTZiMC02Nzg5LTQ1NjctODE2Zi03NzdlZDRkZjA2NmEuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.BUB3YJio3SS9HcO798ByqVJnKRFHg-1yfJK3uwqlkYU")',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          color: '#333333', // Dark text color
-          fontFamily: "'Roboto', sans-serif", // YouTube's primary font
-        }}
-      >
-        <div style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          minHeight: '100vh',
-          padding: '20px',
-        }}>
-          {/* YouTube Music Icon */}
-          <img
-            src="https://cdn.dribbble.com/userupload/20737752/file/original-ebe640c326de24d69e75d9efbfe0d113.gif"
-            alt="YouTube Music Logo"
-            style={{
-              width: '140px',
-              height: '140px',
-              marginBottom: '20px',
-            }}
-          />
-
-          <h2 style={{
-            color: '#FF0000', // YouTube Red
-            fontSize: '24px',
-            fontWeight: 'bold',
-            marginBottom: '30px',
-            textAlign: 'center',
+      <IonContent fullscreen>
+        <div
+          style={{
+            backgroundImage: 'url("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/5b434546-d2d2-4907-92ff-af5ac256c1fe/dhgz2fh-16f356b0-6789-4567-816f-777ed4df066a.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzViNDM0NTQ2LWQyZDItNDkwNy05MmZmLWFmNWFjMjU2YzFmZVwvZGhnejJmaC0xNmYzNTZiMC02Nzg5LTQ1NjctODE2Zi03NzdlZDRkZjA2NmEuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.BUB3YJio3SS9HcO798ByqVJnKRFHg-1yfJK3uwqlkYU")',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            minHeight: '100vh',
+            width: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            padding: '20px',
+          }}
+        >
+          <div style={{
+            backgroundColor: 'rgba(255, 255, 255, 0.2)',
+            borderRadius: '15px',
+            padding: '30px',
+            width: '100%',
+            maxWidth: '420px',
+            backdropFilter: 'blur(8px)',
+            border: '1px solid rgba(255,255,255,0.3)'
           }}>
-            Get Started – Create Profile
-          </h2>
+            {/* YouTube Music Icon */}
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Youtube_Music_icon.svg/1024px-Youtube_Music_icon.svg.png"
+              alt="YouTube Music Logo"
+              style={{
+                width: '140px',
+                height: '140px',
+                margin: '0 auto 20px',
+                display: 'block'
+              }}
+            />
 
-          <IonInput
-            label="User Handle"
-            labelPlacement="floating"
-            fill="outline"
-            type="text"
-            placeholder="Pick a unique handle"
-            value={username}
-            onIonChange={(e) => setUsername(e.detail.value!)}
-            style={{
-              marginTop: '15px',
-              width: '100%',
-              maxWidth: '400px',
-            }}
-          />
+            <h2 style={{
+              color: '#F5ECD5',
+              fontSize: '24px',
+              fontWeight: 'bold',
+              marginBottom: '30px',
+              textAlign: 'center',
+            }}>
+              Get Started – Create Profile
+            </h2>
 
-          <IonInput
-            label="Given Name"
-            labelPlacement="floating"
-            fill="outline"
-            type="text"
-            placeholder="Your first name"
-            value={firstName}
-            onIonChange={(e) => setFirstName(e.detail.value!)}
-            style={{
-              marginTop: '15px',
-              width: '100%',
-              maxWidth: '400px',
-            }}
-          />
+            {/* Inputs */}
+            <IonInput
+              label="User Handle"
+              labelPlacement="floating"
+              fill="outline"
+              type="text"
+              placeholder="Pick a unique handle"
+              value={username}
+              onIonInput={(e) => setUsername(e.detail.value!)}
+              style={{ marginBottom: '15px' }}
+            />
+            <IonInput
+              label="Given Name"
+              labelPlacement="floating"
+              fill="outline"
+              type="text"
+              placeholder="Your first name"
+              value={firstName}
+              onIonInput={(e) => setFirstName(e.detail.value!)}
+              style={{ marginBottom: '15px' }}
+            />
+            <IonInput
+              label="Family Name"
+              labelPlacement="floating"
+              fill="outline"
+              type="text"
+              placeholder="Your last name"
+              value={lastName}
+              onIonInput={(e) => setLastName(e.detail.value!)}
+              style={{ marginBottom: '15px' }}
+            />
+            <IonInput
+              label="Institutional Email"
+              labelPlacement="floating"
+              fill="outline"
+              type="email"
+              placeholder="you@nbsc.edu.ph"
+              value={email}
+              onIonInput={(e) => setEmail(e.detail.value!)}
+              style={{ marginBottom: '15px' }}
+            />
+            <IonInput
+              label="Set Password"
+              labelPlacement="floating"
+              fill="outline"
+              type="password"
+              placeholder="Choose a secure password"
+              value={password}
+              onIonInput={(e) => setPassword(e.detail.value!)}
+              style={{ marginBottom: '15px' }}
+            >
+              <IonInputPasswordToggle slot="end" />
+            </IonInput>
+            <IonInput
+              label="Repeat Password"
+              labelPlacement="floating"
+              fill="outline"
+              type="password"
+              placeholder="Confirm password"
+              value={confirmPassword}
+              onIonInput={(e) => setConfirmPassword(e.detail.value!)}
+              style={{ marginBottom: '20px' }}
+            >
+              <IonInputPasswordToggle slot="end" />
+            </IonInput>
 
-          <IonInput
-            label="Family Name"
-            labelPlacement="floating"
-            fill="outline"
-            type="text"
-            placeholder="Your last name"
-            value={lastName}
-            onIonChange={(e) => setLastName(e.detail.value!)}
-            style={{
-              marginTop: '15px',
-              width: '100%',
-              maxWidth: '400px',
-            }}
-          />
+            {/* Buttons */}
+            <IonButton
+              expand="block"
+              style={{
+                backgroundColor: '#C5172E',
+                color: '#ffffff',
+                fontWeight: 'bold',
+                borderRadius: '10px',
+                marginBottom: '10px',
+              }}
+              onClick={handleVerificationOpen}
+            >
+              Complete Sign Up
+            </IonButton>
 
-          <IonInput
-            label="Institutional Email"
-            labelPlacement="floating"
-            fill="outline"
-            type="email"
-            placeholder="you@nbsc.edu.ph"
-            value={email}
-            onIonChange={(e) => setEmail(e.detail.value!)}
-            style={{
-              marginTop: '15px',
-              width: '100%',
-              maxWidth: '400px',
-            }}
-          />
-
-          <IonInput
-            label="Set Password"
-            labelPlacement="floating"
-            fill="outline"
-            type="password"
-            placeholder="Choose a secure password"
-            value={password}
-            onIonChange={(e) => setPassword(e.detail.value!)}
-            style={{
-              marginTop: '15px',
-              width: '100%',
-              maxWidth: '400px',
-            }}
-          >
-            <IonInputPasswordToggle slot="end" />
-          </IonInput>
-
-          <IonInput
-            label="Repeat Password"
-            labelPlacement="floating"
-            fill="outline"
-            type="password"
-            placeholder="Confirm password"
-            value={confirmPassword}
-            onIonChange={(e) => setConfirmPassword(e.detail.value!)}
-            style={{
-              marginTop: '15px',
-              width: '100%',
-              maxWidth: '400px',
-            }}
-          >
-            <IonInputPasswordToggle slot="end" />
-          </IonInput>
-
-          <IonButton
-            onClick={handleVerificationOpen}
-            expand="full"
-            shape="round"
-            color="danger" // YouTube Red
-            style={{
-              marginTop: '20px',
-              width: '100%',
-              maxWidth: '400px',
-            }}
-          >
-            Complete Sign Up
-          </IonButton>
-
-          <IonButton
-            routerLink="/it35-lab"
-            expand="full"
-            fill="clear"
-            shape="round"
-            style={{
-              width: '100%',
-              maxWidth: '400px',
-              color: '#666666',
-              textDecoration: 'underline',
-            }}
-          >
-            Already registered? Log in instead
-          </IonButton>
+            <IonButton
+              routerLink="/it35-lab"
+              expand="block"
+              fill="clear"
+              style={{
+                color: '#ffffff',
+                textDecoration: 'underline',
+                fontSize: '14px',
+              }}
+            >
+              Already registered? Log in instead
+            </IonButton>
+          </div>
         </div>
 
-        {/* Confirmation Modal */}
+        {/* Verification Modal */}
         <IonModal isOpen={showVerifyModal} onDidDismiss={() => setShowVerifyModal(false)}>
           <IonContent className="ion-padding">
             <IonCard style={{ marginTop: '25%' }}>
@@ -285,7 +264,7 @@ const SignUpPortal: React.FC = () => {
           </IonContent>
         </IonModal>
 
-        {/* Notification Component */}
+        {/* Notification Banner */}
         <NotificationBanner message={alertText} isOpen={alertVisible} onClose={() => setAlertVisible(false)} />
       </IonContent>
     </IonPage>

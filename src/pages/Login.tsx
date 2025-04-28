@@ -85,7 +85,7 @@ const AccessPortal: React.FC = () => {
             />
 
             <h2 style={{
-              color: '#FF0000',
+              color: '#F5ECD5',
               fontSize: '24px',
               fontWeight: 'bold',
               marginBottom: '30px',
@@ -170,12 +170,12 @@ const AccessPortal: React.FC = () => {
             <IonButton
               expand="block"
               style={{
-                backgroundColor: '#FF0000',
+                backgroundColor: '#C5172E',
                 color: '#ffffff',
                 fontWeight: 'bold',
                 borderRadius: '10px',
                 marginBottom: '10px',
-                transition: 'background-color 0.3s ease, box-shadow 0.3s ease',
+                transition: 'background-color 0.4s ease, box-shadow 0.3s ease',
               }}
               onClick={handleLogin}
               onIonFocus={(e) => e.target.style.boxShadow = '0 0 12px 4px #FF0000'}
