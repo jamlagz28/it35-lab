@@ -113,7 +113,7 @@ const SignUpPortal: React.FC = () => {
           }}>
             {/* YouTube Music Icon */}
             <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Youtube_Music_icon.svg/1024px-Youtube_Music_icon.svg.png"
+              src="https://media.tenor.com/8cViuZ78BC4AAAAj/play-youtube.gif"
               alt="YouTube Music Logo"
               style={{
                 width: '140px',

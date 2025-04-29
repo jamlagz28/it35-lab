@@ -52,7 +52,7 @@ const AccessPortal: React.FC = () => {
       <IonContent fullscreen>
         <div
           style={{
-            backgroundImage: 'url("https://i.pinimg.com/originals/79/7b/96/797b96e0880a4fe147f1eaa89d7c7013.gif")',
+            backgroundImage: 'url("https://i.pinimg.com/736x/96/23/6e/96236e0f4baa6e5995d9f377e38e0d88.jpg")',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
@@ -74,7 +74,7 @@ const AccessPortal: React.FC = () => {
             border: '1px solid rgba(255,255,255,0.3)'
           }}>
             <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Youtube_Music_icon.svg/1024px-Youtube_Music_icon.svg.png"
+              src="https://media2.giphy.com/media/mCPpB82V65nvMT7ozD/giphy.gif?cid=6c09b952n7d8lqmemfofb6im7l7sti8rs44r15kgi9ngbcpy&ep=v1_internal_gif_by_id&rid=giphy.gif&ct=s"
               alt="YouTube Music Logo"
               style={{
                 width: '140px',
