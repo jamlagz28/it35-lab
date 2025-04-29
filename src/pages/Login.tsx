@@ -1,117 +1,214 @@
-import { 
+import {
   IonAlert,
-  IonAvatar,
   IonButton,
-  IonContent, 
-  IonIcon, 
-  IonInput, 
-  IonInputPasswordToggle,  
-  IonPage,  
-  IonToast,  
+  IonContent,
+  IonPage,
+  IonToast,
   useIonRouter
 } from '@ionic/react';
 import { useState } from 'react';
 import { supabase } from '../utils/supabaseClient';
 
-const AlertBox: React.FC<{ message: string; isOpen: boolean; onClose: () => void }> = ({ message, isOpen, onClose }) => {
+const NotificationBox: React.FC<{ message: string; isOpen: boolean; onClose: () => void }> = ({ message, isOpen, onClose }) => {
   return (
     <IonAlert
       isOpen={isOpen}
       onDidDismiss={onClose}
-      header="Notification"
+      header="Heads up!"
       message={message}
-      buttons={['OK']}
+      buttons={['Close']}
     />
   );
 };
 
-const Login: React.FC = () => {
-  const navigation = useIonRouter();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [alertMessage, setAlertMessage] = useState('');
-  const [showAlert, setShowAlert] = useState(false);
-  const [showToast, setShowToast] = useState(false);
+const AccessPortal: React.FC = () => {
+  const router = useIonRouter();
+  const [userEmail, setUserEmail] = useState('');
+  const [userPassword, setUserPassword] = useState('');
+  const [notice, setNotice] = useState('');
+  const [showNotice, setShowNotice] = useState(false);
+  const [toastVisible, setToastVisible] = useState(false);
 
-  const doLogin = async () => {
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
+  const handleLogin = async () => {
+    const { error } = await supabase.auth.signInWithPassword({
+      email: userEmail,
+      password: userPassword,
+    });
 
     if (error) {
-      setAlertMessage(error.message);
-      setShowAlert(true);
+      setNotice(error.message);
+      setShowNotice(true);
       return;
     }
 
-    setShowToast(true); 
+    setToastVisible(true);
     setTimeout(() => {
-      navigation.push('/it35-lab/app', 'forward', 'replace');
+      router.push('/it35-lab/app', 'forward', 'replace');
     }, 300);
   };
-  
+
   return (
     <IonPage>
-      <IonContent className='ion-padding'>
-        <div style={{
-          display: 'flex',
-          flexDirection:'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          marginTop:'25%'
-        }}>
-          <IonAvatar
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: '150px',
-              height: '150px',
-              borderRadius: '50%', 
-              overflow: 'hidden' 
-            }}
-          >
-            <img 
-              src="https://ritalinboy.com/app/uploads/2022/05/148-1487614_spotify-logo-small-spotify-logo-transparent-hd-png.png" 
-              alt="Spotify Logo" 
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+      <IonContent fullscreen>
+        <div
+          style={{
+            backgroundImage: 'url("https://i.pinimg.com/736x/96/23/6e/96236e0f4baa6e5995d9f377e38e0d88.jpg")',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            minHeight: '100vh',
+            width: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            padding: '20px',
+          }}
+        >
+          <div style={{
+            backgroundColor: 'rgba(255, 255, 255, 0.2)', // Transparent white
+            borderRadius: '15px',
+            padding: '30px',
+            width: '100%',
+            maxWidth: '420px',
+            backdropFilter: 'blur(8px)', // Frosted glass effect
+            border: '1px solid rgba(255,255,255,0.3)'
+          }}>
+            <img
+              src="https://media2.giphy.com/media/mCPpB82V65nvMT7ozD/giphy.gif?cid=6c09b952n7d8lqmemfofb6im7l7sti8rs44r15kgi9ngbcpy&ep=v1_internal_gif_by_id&rid=giphy.gif&ct=s"
+              alt="YouTube Music Logo"
+              style={{
+                width: '140px',
+                height: '140px',
+                margin: '0 auto 20px',
+                display: 'block'
+              }}
             />
-          </IonAvatar>
-          <h3 style={{
-            textAlign: 'center',
-            fontSize: '24px',
-            fontWeight: 'bold',
-            color: '#1DB954',
-            marginTop: '10px'
-          }}>LOGIN TO SPOTIFY</h3>
-          <IonInput label="Email" labelPlacement="floating" fill="outline" type="email" placeholder="Enter Email" style={{ backgroundColor: '#121212', color: '#FFFFFF', borderRadius: '8px', border: '1px solid #1DB954', padding: '10px' }}
-            value={email}
-            onIonChange={e => setEmail(e.detail.value!)}
-          />
-          <IonInput style={{ marginTop: '10px', backgroundColor: '#121212', color: '#FFFFFF', borderRadius: '8px', border: '1px solid #1DB954', padding: '10px' }}      
-            fill="outline"
-            type="password"
-            placeholder="Password"
-            value={password}
-            onIonChange={e => setPassword(e.detail.value!)}
-          >
-            <IonInputPasswordToggle slot="end"></IonInputPasswordToggle>
-          </IonInput>
+
+            <h2 style={{
+              color: '#F5ECD5',
+              fontSize: '24px',
+              fontWeight: 'bold',
+              marginBottom: '30px',
+              textAlign: 'center',
+            }}>
+              Log in to Your YouTube Portal
+            </h2>
+
+            {/* Email Input */}
+            <div style={{ position: 'relative', marginBottom: '15px' }}>
+              <input
+                type="email"
+                placeholder=" "
+                value={userEmail}
+                onChange={(e) => setUserEmail(e.target.value)}
+                onFocus={(e) => e.target.style.boxShadow = '0 0 8px 2pxrgb(255, 255, 255)'}
+                onBlur={(e) => e.target.style.boxShadow = 'none'}
+                style={{
+                  width: '100%',
+                  backgroundColor: '#ffffff',
+                  border: '1px solid #FF0000',
+                  color: '#333333',
+                  borderRadius: '8px',
+                  padding: '12px 10px',
+                  fontSize: '16px',
+                  transition: 'box-shadow 0.3s ease',
+                }}
+              />
+              {userEmail.length === 0 && (
+                <label style={{
+                  position: 'absolute',
+                  top: '50%',
+                  left: '10px',
+                  color: '#FF0000',
+                  fontSize: '16px',
+                  pointerEvents: 'none',
+                  transform: 'translateY(-50%)',
+                  transition: '0.2s ease all',
+                }}>
+                  Email
+                </label>
+              )}
+            </div>
+
+            {/* Password Input */}
+            <div style={{ position: 'relative', marginBottom: '25px' }}>
+              <input
+                type="password"
+                placeholder=" "
+                value={userPassword}
+                onChange={(e) => setUserPassword(e.target.value)}
+                onFocus={(e) => e.target.style.boxShadow = '0 0 8px 2px #FF0000'}
+                onBlur={(e) => e.target.style.boxShadow = 'none'}
+                style={{
+                  width: '100%',
+                  backgroundColor: '#ffffff',
+                  border: '1px solid #FF0000',
+                  color: '#333333',
+                  borderRadius: '8px',
+                  padding: '12px 10px',
+                  fontSize: '16px',
+                  transition: 'box-shadow 0.3s ease',
+                }}
+              />
+              {userPassword.length === 0 && (
+                <label style={{
+                  position: 'absolute',
+                  top: '50%',
+                  left: '10px',
+                  color: '#FF0000',
+                  fontSize: '16px',
+                  pointerEvents: 'none',
+                  transform: 'translateY(-50%)',
+                  transition: '0.2s ease all',
+                }}>
+                  Password
+                </label>
+              )}
+            </div>
+
+            {/* Login Button */}
+            <IonButton
+              expand="block"
+              style={{
+                backgroundColor: '#C5172E',
+                color: '#ffffff',
+                fontWeight: 'bold',
+                borderRadius: '10px',
+                marginBottom: '10px',
+                transition: 'background-color 0.4s ease, box-shadow 0.3s ease',
+              }}
+              onClick={handleLogin}
+              onIonFocus={(e) => e.target.style.boxShadow = '0 0 12px 4px #FF0000'}
+              onIonBlur={(e) => e.target.style.boxShadow = 'none'}
+            >
+              Log In
+            </IonButton>
+
+            {/* Register Link */}
+            <IonButton
+              routerLink="/it35-lab/Register"
+              expand="block"
+              fill="clear"
+              style={{
+                color: '#ffffff',
+                textDecoration: 'underline',
+                fontSize: '14px',
+                transition: 'color 0.3s ease',
+              }}
+              onIonFocus={(e) => e.target.style.color = '#FF0000'}
+              onIonBlur={(e) => e.target.style.color = '#ffffff'}
+            >
+              Need an account? Register here
+            </IonButton>
+          </div>
         </div>
-        <IonButton onClick={doLogin} expand="full" shape='rectangle'>
-        Log Into Your Account
-        </IonButton>
 
-        <IonButton routerLink="/it35-lab/Register" expand="full" fill="clear" shape='round'>
-          Don't have an account? Register here
-        </IonButton>
+        <NotificationBox message={notice} isOpen={showNotice} onClose={() => setShowNotice(false)} />
 
-        {/* Reusable AlertBox Component */}
-        <AlertBox message={alertMessage} isOpen={showAlert} onClose={() => setShowAlert(false)} />
-
-        {/* IonToast for success message */}
         <IonToast
-          isOpen={showToast}
-          onDidDismiss={() => setShowToast(false)}
-          message="Login complete! Preparing your dashboard"
+          isOpen={toastVisible}
+          onDidDismiss={() => setToastVisible(false)}
+          message="Welcome! Redirecting to your dashboard..."
           duration={1500}
           position="top"
           color="success"
@@ -121,4 +218,4 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;
+export default AccessPortal;
